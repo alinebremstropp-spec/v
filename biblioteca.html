@@ -39,7 +39,7 @@ button:hover{
 }
 .remover{
     background:red;
-    border-radius: 5px;
+    border-radius:5px;
 }
 </style>
 </head>
@@ -57,28 +57,28 @@ button:hover{
 <button onclick="ordenarLivros()">Ordenar A-Z</button>
 <h2 id="total"></h2>
 <div id="biblioteca"></div>
-<script>
 
+<script>
 let livros = [
 {
-titulo:"Nascida à Meia-Noite",
-serie:"Shadow Falls",
-ano:2011
+    titulo:"Nascida à Meia-Noite",
+    serie:"Shadow Falls",
+    ano:2011
 },
 {
-titulo:"Desperta ao Amanhecer",
-serie:"Shadow Falls",
-ano:2012
+    titulo:"Desperta ao Amanhecer",
+    serie:"Shadow Falls",
+    ano:2012
 },
 {
-titulo:"Levada ao Entardecer",
-serie:"Shadow Falls",
-ano:2012
+    titulo:"Levada ao Entardecer",
+    serie:"Shadow Falls",
+    ano:2012
 },
 {
-titulo:"Sussurros ao Luar",
-serie:"Shadow Falls",
-ano:2013
+    titulo:"Sussurros ao Luar",
+    serie:"Shadow Falls",
+    ano:2013
 }
 ];
 
@@ -86,8 +86,11 @@ listarLivros();
 
 function listarLivros(){
     let div=document.getElementById("biblioteca");
+
     div.innerHTML="";
-    document.getElementById("total").innerHTML="Quantidade de livros: "+livros.length;
+
+    document.getElementById("total").innerHTML =
+    "Quantidade de livros: " + livros.length;
 
     for(let i=0;i<livros.length;i++){
         div.innerHTML +=
@@ -99,19 +102,22 @@ function listarLivros(){
         "</div>";
     }
 }
+
 function adicionarLivro(){
-    let tilulo=document.getElementById("titulo").value.trim();
+    let titulo=document.getElementById("titulo").value.trim();
     let serie=document.getElementById("serie").value.trim();
     let ano=document.getElementById("ano").value;
+
 
     if(titulo=="" || serie=="" || ano==""){
         alert("Preencha todos os campos.");
         return;
     }
+
     livros.push({
         titulo:titulo,
         serie:serie,
-        ano:ano
+        ano:Number(ano)
     });
 
     listarLivros();
@@ -119,22 +125,28 @@ function adicionarLivro(){
     document.getElementById("titulo").value="";
     document.getElementById("serie").value="";
     document.getElementById("ano").value="";
+
 }
+
 function removerLivro(posicao){
     livros.splice(posicao,1);
-
     listarLivros();
 }
+
 function pesquisarLivro(){
+
     let pesquisa=document.getElementById("pesquisa").value.trim().toLowerCase();
+
     let div=document.getElementById("biblioteca");
+
     div.innerHTML="";
+
     let encontrados=0;
 
     for(let i=0;i<livros.length;i++){
-
         if(livros[i].titulo.toLowerCase().includes(pesquisa)){
             encontrados++;
+
             div.innerHTML +=
             "<div class='card'>"+
             "<h2>"+livros[i].titulo+"</h2>"+
@@ -142,18 +154,24 @@ function pesquisarLivro(){
             "<p><b>Ano:</b> "+livros[i].ano+"</p>"+
             "<button class='remover' onclick='removerLivro("+i+")'>Remover</button>"+
             "</div>";
+
         }
     }
+
     if(encontrados==0){
         div.innerHTML="<h2>Nenhum livro encontrado.</h2>";
     }
-    document.getElementById("total").innerHTML="Livros encontrados: "+encontrados;
+
+    document.getElementById("total").innerHTML =
+    "Livros encontrados: " + encontrados;
 }
+
+
+
 function ordenarLivros(){
     livros.sort(function(a,b){
-    return a.titulo.localeCompare(b.titulo);
+        return a.titulo.localeCompare(b.titulo);
     });
-
     listarLivros();
 }
 </script>
